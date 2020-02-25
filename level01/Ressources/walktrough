@@ -1,0 +1,10 @@
+Pour le level01 j'ai voulu utiliser la meme commande pour voir ce que je pouvais faire et j'ai constaté 
+que le mot de passe pour flag01 n'est pas stocké dans /etc/shadow mais dans /etc/passwd crypté sur la ligne flag01
+(voir source https://www.cyberciti.biz/faq/understanding-etcpasswd-file-format/)
+
+J'ai essayé de le décrypté sans succès avec les sites de décryptage et je suis tombé sur l'outil JohnTheRipper (surement un hint du level00 avec le fichier nommé john)
+qui va me permettre de décrypter ce mot de passe. (voir doc https://openwall.info/wiki/john/tutorials/Ubuntu-build-howto si besoin)
+
+    - Sur votre machine, lancer le script john.sh qui va s'occuper de telecharger JohnTheRipper, le decompresser et le compiler
+    - Ensuite le script va recuperer /etc/passwd sur la VM pour la mettre sur votre machine (il faudra entrer le mot de passe "nottoohardhere" quand prompt)
+    - John va ensuite se lancer et decrypter le mot de passe

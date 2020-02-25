@@ -6,4 +6,6 @@ Ce fichier une fois cat donne une string crypté "cdiiddwpgswtgt" que j'ai éssa
 J'ai décidé de le brute force avec https://md5decrypt.net/Cesar/ en cherchant un output qui serait coherent et on tombe sur "nottoohardhere"
 A savoir que ca aurait pu etre n'importe quoi mais c'etait assez flagrant
 
-On peut donc faire un su flag00 avec "nottoohardhere" en passwd et faire un getflag pour obtenir le flag "x24ti5gi3x0ol2eh4esiuxias"
+On peut donc récuperer le flag:
+    -su flag00 avec le password "nottoohardhere"
+    -getflag pour obtenir le flag x24ti5gi3x0ol2eh4esiuxias
