@@ -1,0 +1,9 @@
+J'ai fait une recherche de fichiers auquels j'avais les droits avec l'uid correspodant a mon level
+    - find / -uid 3000
+
+On repere facilement un fichier appelé john situé dans /usr/sbin
+Ce fichier une fois cat donne une string crypté "cdiiddwpgswtgt" que j'ai éssayé de passer en rot simple (13) puis 42 sans succès
+J'ai décidé de le brute force avec https://md5decrypt.net/Cesar/ en cherchant un output qui serait coherent et on tombe sur "nottoohardhere"
+A savoir que ca aurait pu etre n'importe quoi mais c'etait assez flagrant
+
+On peut donc faire un su flag00 avec "nottoohardhere" en passwd et faire un getflag pour obtenir le flag "x24ti5gi3x0ol2eh4esiuxias"
