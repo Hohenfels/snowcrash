@@ -1,0 +1,15 @@
+On se connecte au level03 avec kooda2puivaav1idi4f57q8iq
+
+On y trouve un fichier level03, que l'on peut executer et qui affiche Exploit me
+Si on cat (plutot strings car c'est degueu), on peut voir que le programme appel echo via usr/bin/env
+
+On peut utiliser un symlink exploit qui consiste a usurper echo:
+    - Dans un premier temps on usurpe echo en lien notre faux echo a getFlag
+        ln -s /bin/getflag /tmp/echo
+
+    - On ajoute ensuite /tmp au PATH: export PATH=/tmp:$PATH
+
+    Parceque level03 beneficie des droits de flag03, quand on lance notre programme
+    qui usurpe echo, le programme va lancer getflag a la place et nous afficher le flag de flag03.
+
+    le flag : qi0maab88jeaj46qoumi7maus

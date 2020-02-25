@@ -1,0 +1,35 @@
+En se connectant a level02, on peut voir un fichier pcap
+Selon https://www.reviversoft.com/fr/file-extensions/pcap c'est un fichier fortement associe a wireshark, une interface qui permet de lire ces fichiers.
+
+Commencer par installer wireshark https://www.wireshark.org/#download
+
+Ensuite on va scp le pcap et le recuperer sur notre machine
+    - scp -P 4242 level02@192.168.1.26:~/level02.pcap . (passwd f2av5il02puano7naaf6adaaf)
+
+Ouvrir avec wireshark le fichier, c'est pas facile, mais il faut lire uniquement la partie data de chaque paquets.
+On trouve plusieurs choses:
+
+    Sur le paquet 11, sans doute un troll ou un indice : 'Ì$Ew æ@@Iþ;éëÚ;éëßO/Y×º¨úos¤
+                                                        ´$Â.êÿú 38400,38400ÿðÿú#SodaCan:0ÿðÿú'DISPLAYSodaCan:0ÿðÿúxtermÿð
+    On peut isoler DISPLAYSodaCan mais pas important.
+
+    On y trouve aussi sur le paquet 20 $'ÌEÔ«@@A;éëß;éëÚ/YOº¨úÀtÅK
+                        Â.ó´(
+                        Linux 2.6.38-8-generic-pae (::ffff:10.1.1.2) (pts/10)
+                        wwwbugs login: 
+    Pareil, pas tres important mais dorénavant on sait qu'il va vraiment falloir suivre uniquement la partie data des paquets pour en tirer quelque chose,
+    visblement c'est ici qu'il se cache quelque chose.
+
+    Passons au paquet 43, on y voit ecrit password: $'ÌEAÔ³@@w;éëß;éëÚ/YOº¨û{Å' Â<b¹ Password: 
+    On peut supposer que la suite arrive apres.
+
+    On skip tout les paquets ou il n y a pas de data et en suivant l'ordre des paquets on peut tomber sur:
+        - ft wandr...NDRel.L0L ou les points sont des 7F (del)
+    Et on peut voir apres que le mot de passe ci-dessus a été entré et est incorrect : $'ÌEWÔË@@I;éëß;éëÚ/YOº¨û)ÅÝ
+                                                                                        ÂR}Â^
+                                                                                        Login incorrect
+                                                                                        wwwbugs login: 
+    Après, plus rien
+
+    Si on éssaye de notre cote en retirant les caractere precedent le 7f avec le 7f on obtient: ft_waNDReL0L
+    On obtient le flag kooda2puivaav1idi4f57q8iq avec getflag

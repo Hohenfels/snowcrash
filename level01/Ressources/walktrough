@@ -6,5 +6,10 @@ J'ai essayé de le décrypté sans succès avec les sites de décryptage et je s
 qui va me permettre de décrypter ce mot de passe. (voir doc https://openwall.info/wiki/john/tutorials/Ubuntu-build-howto si besoin)
 
     - Sur votre machine, lancer le script john.sh qui va s'occuper de telecharger JohnTheRipper, le decompresser et le compiler
-    - Ensuite le script va recuperer /etc/passwd sur la VM pour la mettre sur votre machine (il faudra entrer le mot de passe "nottoohardhere" quand prompt)
-    - John va ensuite se lancer et decrypter le mot de passe
+    - Ensuiter lancer sudo scp -P 4242 level00@192.168.1.26:/etc/passwd passwd (passwd x24ti5gi3x0ol2eh4esiuxias)
+        puis ./john-1.9.0-jumbo-1/run/john passwd
+        et rajouter l'option --show a la meme commande     
+
+John nous affiche la ligne avec le mot de passe de la ligne flag01 decrypte "flag01:abcdefg:3001:3001::/home/flag/flag01:/bin/bash"
+
+Le mot de passe est donc abcdefg, il ne reste plus qu'a su flag01 avec abcdefg puis getflag pour obtenir f2av5il02puano7naaf6adaaf
