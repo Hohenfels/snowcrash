@@ -1,0 +1,9 @@
+On se connecte a level08 avec fiumuikeil55xe9cu4dood66h
+
+On peut voir un binaire level08 qui est setuid entre flag08 et level08 et un fichier token.
+Quand on ltrace (ou gdb) notre binaire, on peut voir qu'il effectue un printf d'un fichier envoyé en argument.
+On peut donc en deduire que le but ici est de print le contenu de token ce qui est impossible car nous n'avons pas les droits sur token
+
+Pour exploit on va devoir creer un nouveau lien entre /home/user/level08/token vers /tmp/exploit
+puis ./level08 /tmp/exploit et nous obtenons notre token quif5eloekouj29ke0vouxean qui nous permet de se connecter a flag08 et de getflag 25749xKZ8L7DkSCwJkT9dyv6f
+

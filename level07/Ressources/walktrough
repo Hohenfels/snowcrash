@@ -1,0 +1,16 @@
+On se connecte a level07 avec wiok45aaoguiboiki2tuin6ub
+
+On remarque avec un ls la présence d'un binaire level07,
+Quand on le lance, il affiche level07
+
+Si on strings sur le binaire, on note la presence de deux choses:
+    - un getenv est appelé
+    - une variable LOGNAME
+
+si on regarde les variables env on appercoit notre LOGNAME avec la valeur level07
+On sait aussi quand faisant un ls -l que notre binaire a un setuid entre flag07 et level07, ce qui va nous permettre de faire un exploit
+
+Pour ca:
+    - On change la valeur de la variable LOGNAME avec getflag pour qu'une fois appelé dans notre binaire nous donne le retour de getflag
+        export LOGNAME="`getflag`"
+    - On a plus qu'a executer notre binaire ./level07 et notre flag apparait: fiumuikeil55xe9cu4dood66h

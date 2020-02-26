@@ -1,0 +1,20 @@
+On se connecte a level09 avec 25749xKZ8L7DkSCwJkT9dyv6f
+
+On peut voir un binaire level09 et un fichier token.
+Le premier, va en réalité crypter une string ou chaque valeur du caractère est incrémenté avec sa position de la string:
+    - par éxemple abc -> a = a car sa position = 0, b = c car valeur(b) + 1 = c, c = e car valeur(c) + 2 = e, etc ...
+
+Quand a token il contient une ligne déja crypté que nous allons devoir decrypt.
+
+Pour faire cela, il faut d'abord importer token sur notre machine:
+    - scp -P 4242 level09@192.168.1.26:~/token .
+
+Puis ensuite executer notre programme sur token:
+    - gcc -o decode decode.c
+    - ./decode token
+
+On obtient le token f3iji1ju5yuevaus41q1afiuq qui nous permet de se connecter a flag09
+    - su flag09 avec f3iji1ju5yuevaus41q1afiuq
+
+On peut ensuite getflag pour obtenir le flag s5cAJpM8ev6XHw998pRWG728z
+
