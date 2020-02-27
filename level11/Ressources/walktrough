@@ -1,0 +1,18 @@
+On se connecte a level11 avec feulo4b72j7edeahuete3no7c
+
+On peut voir un script lua level11.lua, quand on le cat on peut voir plusieurs chose:
+    - local server = assert(socket.bind("127.0.0.1", 5151)) un bind du socket vers localhost:5151
+    - un mot de passe hash qui en realite est une fausse piste
+    - un io.popen qui d'apres de la doc, permet aussi d'executer des commandes (http://lua.2524044.n2.nabble.com/Lua-shell-How-to-quot-pipe-quot-commands-in-os-execute-td7626253.html)
+        la doc est pas tres lisible mais donne une idee de ce qu'on peut faire.
+        La commande sera lancée quand on essayerai de rentrer un mot de passe:
+            - Pour ca on va utiliser telnet (je l'ai decouvert apres netcat et je voulais changer)
+                > telnet 127.0.0.1 5151
+                Qui va nous prompt un mot de passe, c'est la que nous allons devoir rentrer notre commande a executer mais si le programme exit
+                Apres recherche, il va falloir faire du command chaining (https://www.lostsaloon.com/technology/how-to-chain-commands-in-linux-command-line-with-examples/)
+
+                On peut par exemple faire au moment du prompt "cat ~/level12.lua && getflag > /tmp/exploit".
+                Ici on utilise l'operateur && qui va executer la commande a droite si celle de gauche reussie, il y a plusieurs maniere de faire
+                mais on ne pourra pas simplement marquer getflag > /tmp/exploit, cela ecrira seulement getflag dans exploit ...
+
+Apres ca, on obtient notre flag fa6v5ateaw21peobuub8ipe6s

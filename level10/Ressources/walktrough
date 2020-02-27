@@ -1,0 +1,43 @@
+On se connecte a level10 avec s5cAJpM8ev6XHw998pRWG728z
+
+On remarque toujours un binaire level10 et un fichier token
+
+level10, est un programme qui va prendre deux arguments:
+    - un fichier
+    - une IP (dans notre cas celle de la VM)
+On peut essayer d'envoyer un fichier bidon dans /tmp cela fonctionnera, mais on ne dispose pas des droits sur token
+
+token quand a lui doit contenir le token pour se connecter a flag10
+
+On peut tenter un exploit symlink mais cela ne fonctionne pas
+
+En farfouillant sur les internet a la recherche d'exploit symlink on peut tomber sur http://repository.root-me.org/Programmation/C%20-%20C++/EN%20-%20Secure%20Coding%20in%20C%20and%20C++%20Race%20Conditions.pdf
+
+Une partie nous interesse, celle avec access() (page 15), nous devons d'abord verifier si notre binaire l'utilise:
+    - strings level10
+    - On peut bien voir que la fonction access est appelé
+    - On note aussi egalement la presence de Connecting to %s:6969, le programme essaye d'envoyer quelque chose sur le port 6969, c'est important
+
+On a donc la confirmation de l'utilisation d'access() par notre binaire
+Selon la doc, il existe une micro fenetre d'exploitation quand access laisse la main a open qui
+nous permettrait de faire une race condition.
+
+Pour cela, nous allons suivre la doc:
+    Dans un fichier racecondition.sh (on peut juste copy paste la boucle dans le terminal) on va creer une boucle avec dedans:
+        - ln -s ~/level10 /tmp/exploit -> ~/level10 car nous avons des droits (partiels) dessus
+        - ln -s ~/token /tmp/exploit -> On switch les droits avec token
+    Eventuellement le systeme va rentrer dans la micro fenetre et juste lancer le programme avec token en ayant les droits.
+
+Dans un autre terminal, pour voir le resultat il faudra ecouter le port 6969 que nous avons vu plus haut
+et le resultat va etre:
+    ```
+    Connection from 192.168.1.26 port 6969 [tcp/*] accepted
+    .*( )*.
+    woupa2yuojeeaaed06riuj63c
+    ```
+
+On peut donc se connecter a flag10 avec ce token et getflag feulo4b72j7edeahuete3no7c
+
+
+
+
